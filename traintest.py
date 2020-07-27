@@ -12,13 +12,13 @@ def train(epochs, batch_size, trainer, validator, train_dataloader, val_dataload
     for i in range(max_iteration):
         batch_x, batch_y = train_dataloader.read_batch(batch_size)
         trainstep(batch_x, batch_y)
-        if i % print_freq == 0:
-            batch_x, batch_y = val_dataloader.read_batch(batch_size)
-            valstep(batch_x, batch_y)
-            logger.update(i)
-
-        if i % epochs == 0:
-            model.save_model(int(i/epochs), output_path)
+        # if i % print_freq == 0:
+        #     batch_x, batch_y = val_dataloader.read_batch(batch_size)
+        #     valstep(batch_x, batch_y)
+        #     logger.update(i)
+        #
+        # if i % epochs == 0:
+        #     model.save_model(int(i/epochs), output_path)
 
 def check_accuracy(validator, test_dataloader, test_number):
     batch_x, batch_y, paths, labels = test_dataloader.read_batch_with_details(test_number)
