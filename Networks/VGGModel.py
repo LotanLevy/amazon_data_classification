@@ -17,6 +17,7 @@ class VGGModel(NNInterface):
         self.__model = vgg16.VGG16(weights='imagenet', include_top=False)
 
     def update_classes(self, classes_num, image_size):
+        print(classes_num)
 
         vgg_conv = vgg16.VGG16(weights='imagenet', include_top=False)
         for layer in vgg_conv.layers[:]:
@@ -41,7 +42,7 @@ class VGGModel(NNInterface):
     def compute_output_shape(self, input_shape):
         return self.__model.compute_output_shape(input_shape)
 
-    
+
 
     def save_model(self, iter_num, output_path):
         output_path = os.path.join(output_path, "ckpts")
