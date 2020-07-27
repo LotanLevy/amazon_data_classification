@@ -21,8 +21,8 @@ def get_args():
     parser.add_argument('--learning_rate2', default=1e-5, type=float)
     parser.add_argument('--dropout_keep_prob', default=0.5, type=float)
     parser.add_argument('--weight_decay', default=5e-4, type=float)
-    parser.add_argument('--output_path', default=5e-4, type=float)
-    parser.add_argument('--cls_num', type=int, default=1000, help='The number of classes in the dataset')
+    parser.add_argument('--output_path', '-o', type=str )
+    parser.add_argument('--cls_num', type=int, default=82, help='The number of classes in the dataset')
     parser.add_argument('--input_size', type=int, nargs=2, default=(224, 224))
     parser.add_argument('--print_freq', type=int, default=500)
 
