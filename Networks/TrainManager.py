@@ -25,7 +25,7 @@ class TrainTestHelper:
             with tf.GradientTape(persistent=True) as tape:
                 prediction = self.model(inputs, training=self.training)
                 loss_value = self.loss_func(labels, prediction)
-                # self.loss_logger(loss_value)
+                self.loss_logger(loss_value)
 
 
             # if self.training:
