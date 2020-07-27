@@ -52,7 +52,7 @@ def main():
     trainer = TrainTestHelper(network, optimizer, loss, training=True)
     validator = TrainTestHelper(network, optimizer, loss, training=False)
 
-    train(args.num_epochs1, args.batch_size, trainer, validator, train_dataloader, val_dataloader, args.print_freq, args.output_path, network)
+    train(args.num_epochs1, args.batch_size, trainer, validator, train_dataloader, val_dataloader, args.print_freq, args.output_path)
 
     # optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate2)
     # trainer.update_optimizer(optimizer)

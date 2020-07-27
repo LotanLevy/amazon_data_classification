@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 
 
-def train(epochs, batch_size, trainer, validator, train_dataloader, val_dataloader, print_freq, output_path, model):
+def train(epochs, batch_size, trainer, validator, train_dataloader, val_dataloader, print_freq, output_path):
     max_iteration = epochs * batch_size
     trainstep = trainer.get_step()
     # valstep = validator.get_step()
