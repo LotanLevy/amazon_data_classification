@@ -45,7 +45,7 @@ def main():
     val_dataloader = DataLoader("val_dataset", args.val_file, args.cls_num, args.input_size, args.output_path, augment=False)
 
     optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate1)
-    loss = tf.keras.losses.SparseCategoricalCrossentropy()
+    loss = tf.keras.losses.CategoricalCrossentropy()
     network = nn_builder.get_network(args.nntype)
     print(args.cls_num)
     network.update_classes(args.cls_num, args.input_size)
