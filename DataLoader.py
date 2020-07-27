@@ -92,7 +92,6 @@ class DataLoader:
             b_idx += 1
 
         hot_vecs = tf.keras.utils.to_categorical(np.array(labels), num_classes=self.classes_num)
-        print(hot_vecs.shape())
         return batch_images, hot_vecs, paths, labels
 
     def read_batch(self, batch_size):
