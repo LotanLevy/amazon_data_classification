@@ -48,6 +48,7 @@ def main():
 
     trainer = TrainTestHelper(network, optimizer, loss, training=True)
     validator = TrainTestHelper(network, optimizer, loss, training=False)
+    print("in")
 
     train(args.num_epochs1, args.batch_size, trainer, validator, train_dataloader, val_dataloader, args.print_freq, args.output_path)
 
