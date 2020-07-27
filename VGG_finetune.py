@@ -40,8 +40,8 @@ def main():
         os.makedirs(args.output_path)
 
 
-    train_dataloader = DataLoader("train_dataset", args.train_file, args.cls_num, args.input_size, args.output_path)
-    val_dataloader = DataLoader("val_dataset", args.val_file, args.cls_num, args.input_size, args.output_path)
+    train_dataloader = DataLoader("train_dataset", args.train_file, args.cls_num, args.input_size, args.output_path, augment=True)
+    val_dataloader = DataLoader("val_dataset", args.val_file, args.cls_num, args.input_size, args.output_path, augment=False)
     optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate1)
     loss = tf.keras.losses.SparseCategoricalCrossentropy()
     network = nn_builder.get_network(args.nntype)
