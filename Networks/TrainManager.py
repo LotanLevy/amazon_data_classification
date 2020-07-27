@@ -10,9 +10,8 @@ class TrainTestHelper:
         self.model = model
         self.optimizer = optimizer
         self.loss_func = loss_func
-        self.loss_logger = tf.keras.metrics.Mean(name='loss')
+        # self.loss_logger = tf.keras.metrics.Mean(name='loss')
         self.training = training
-        self.steps =  []
 
     def update_optimizer(self, optimizer):
         self.optimizer = optimizer
@@ -25,15 +24,15 @@ class TrainTestHelper:
         def train_step(inputs, labels):
             with tf.GradientTape(persistent=True) as tape:
                 prediction = self.model(inputs, training=self.training)
-                loss_value = self.loss_func(labels, prediction)
-                self.loss_logger(loss_value)
+                # loss_value = self.loss_func(labels, prediction)
+                # self.loss_logger(loss_value)
 
 
-            if self.training:
-
-                grads = tape.gradient(loss_value, self.model.trainable_variables)
-
-                self.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
+            # if self.training:
+            #
+            #     grads = tape.gradient(loss_value, self.model.trainable_variables)
+            #
+            #     self.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
 
         return train_step
 
