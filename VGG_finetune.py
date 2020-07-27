@@ -22,7 +22,7 @@ def get_args():
     parser.add_argument('--dropout_keep_prob', default=0.5, type=float)
     parser.add_argument('--weight_decay', default=5e-4, type=float)
     parser.add_argument('--output_path', '-o', type=str )
-    parser.add_argument('--cls_num', type=int, default=82, help='The number of classes in the dataset')
+    parser.add_argument('--cls_num', type=int, default=76, help='The number of classes in the dataset')
     parser.add_argument('--input_size', type=int, nargs=2, default=(224, 224))
     parser.add_argument('--print_freq', type=int, default=500)
 
@@ -47,6 +47,7 @@ def main():
     optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate1)
     loss = tf.keras.losses.SparseCategoricalCrossentropy()
     network = nn_builder.get_network(args.nntype)
+    network.update_classes(args.cls_num, args.input_size)
 
     trainer = TrainTestHelper(network, optimizer, loss, training=True)
     validator = TrainTestHelper(network, optimizer, loss, training=False)
