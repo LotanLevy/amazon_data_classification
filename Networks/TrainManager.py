@@ -36,8 +36,6 @@ class TrainTestHelper:
 
         return train_step
 
-    def __del__(self):
-        with open("text.txt", 'w') as f:
-            f.write(str(self.steps))
+
 
 
