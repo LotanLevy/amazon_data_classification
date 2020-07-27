@@ -18,7 +18,7 @@ class VGGModel(NNInterface):
 
     def update_classes(self, classes_num, image_size):
 
-        vgg_conv = vgg16.VGG16(weights='imagenet', include_top=False, input_shape=(image_size[0], image_size[1], 3))
+        vgg_conv = vgg16.VGG16(weights='imagenet', include_top=False)
         for layer in vgg_conv.layers[:]:
             layer.trainable = False
 
@@ -41,17 +41,7 @@ class VGGModel(NNInterface):
     def compute_output_shape(self, input_shape):
         return self.__model.compute_output_shape(input_shape)
 
-    def freeze_layers(self, freeze_idx):
-
-        for i, layer in enumerate(self.__model.layers):
-            if freeze_idx > i:
-                layer.trainable = False
-            else:
-                layer.trainable = True
-
-
-        for i, layer in enumerate(self.__model.layers):
-            print("layer {} is trainable {}".format(layer.name, layer.trainable))
+    
 
     def save_model(self, iter_num, output_path):
         output_path = os.path.join(output_path, "ckpts")
