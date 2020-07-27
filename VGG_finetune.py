@@ -47,7 +47,6 @@ def main():
     optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate1)
     loss = tf.keras.losses.CategoricalCrossentropy()
     network = nn_builder.get_network(args.nntype)
-    print(args.cls_num)
     network.update_classes(args.cls_num, args.input_size)
 
     trainer = TrainTestHelper(network, optimizer, loss, training=True)
@@ -55,10 +54,10 @@ def main():
 
     train(args.num_epochs1, args.batch_size, trainer, validator, train_dataloader, val_dataloader, args.print_freq, args.output_path)
 
-    optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate2)
-    trainer.update_optimizer(optimizer)
-    validator.update_optimizer(optimizer)
-    train(args.num_epochs1, args.batch_size, trainer, validator, train_dataloader, val_dataloader, args.print_freq, args.output_path)
+    # optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate2)
+    # trainer.update_optimizer(optimizer)
+    # validator.update_optimizer(optimizer)
+    # train(args.num_epochs1, args.batch_size, trainer, validator, train_dataloader, val_dataloader, args.print_freq, args.output_path)
 
 
 if __name__=="__main__":
