@@ -12,6 +12,7 @@ def train(epochs, batch_size, trainer, validator, train_dataloader, val_dataload
     for i in range(max_iteration):
         batch_x, batch_y = train_dataloader.read_batch(batch_size)
         trainstep(batch_x, batch_y)
+        print(i)
         # if i % print_freq == 0:
         #     batch_x, batch_y = val_dataloader.read_batch(batch_size)
         #     valstep(batch_x, batch_y)
