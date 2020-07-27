@@ -24,26 +24,16 @@ class TrainTestHelper:
         @tf.function()
         def train_step(inputs, labels):
             with tf.GradientTape(persistent=True) as tape:
-                self.steps.append(0)
-
                 prediction = self.model(inputs, training=self.training)
-                self.steps.append(1)
-
                 loss_value = self.loss_func(labels, prediction)
-                self.steps.append(3)
-
                 self.loss_logger(loss_value)
-                self.steps.append(4)
 
 
             if self.training:
-                self.steps.append(6)
 
                 grads = tape.gradient(loss_value, self.model.trainable_variables)
-                self.steps.append(7)
 
                 self.optimizer.apply_gradients(zip(grads, self.model.trainable_variables))
-                self.steps.append(8)
 
         return train_step
 

@@ -4,11 +4,10 @@ import matplotlib.pyplot as plt
 import os
 
 
-def train(epochs, batch_size, trainer, validator, train_dataloader, val_dataloader, print_freq, output_path):
+def train(epochs, batch_size, trainer, validator, train_dataloader, val_dataloader, print_freq, output_path, model):
     max_iteration = epochs * batch_size
     trainstep = trainer.get_step()
     valstep = validator.get_step()
-    model = trainer.model
     logger = TrainLogger(trainer, validator, output_path)
     for i in range(max_iteration):
         batch_x, batch_y = train_dataloader.read_batch(batch_size)
