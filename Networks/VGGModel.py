@@ -17,9 +17,8 @@ class VGGModel(NNInterface):
         self.__model = vgg16.VGG16(weights='imagenet', include_top=False)
 
     def update_classes(self, classes_num, image_size):
-        print(classes_num)
 
-        vgg_conv = vgg16.VGG16(weights='imagenet', include_top=False)
+        vgg_conv = vgg16.VGG16(weights='imagenet', include_top=False, input_shape=(image_size[0], image_size[1], 3))
         for layer in vgg_conv.layers[:]:
             layer.trainable = False
 
