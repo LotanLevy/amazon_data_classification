@@ -9,13 +9,12 @@ import random
 
 def get_random_crop(image: Image, height: int, width: int)->Image:
     x, y = image.size
-    x1 = random.randrange(0, x - height)
-    y1 = random.randrange(0, y - width)
+    x1 = random.randrange(0, max(1, x - height))
+    y1 = random.randrange(0,  max(1, y - width))
     return image.crop((x1, y1, x1 + height, y1 + width))
 
 def get_random_flip(image: Image)->Image:
     flip = random.choice([True, False])
-    print(flip)
     if flip:
         image = image.transpose(method=Image.FLIP_LEFT_RIGHT)
     return image
