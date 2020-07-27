@@ -53,9 +53,19 @@ class DataLoader:
         self.labels_logger = []
         self.batch_idx = 0
 
+
+
         self.datasets = read_dataset_map(dataset_file, shuffle=True)
+        unique_labels = np.unique(self.datasets[1])
+        assert len(unique_labels) == cls_num
+        new_labels = np.arange(0, len(unique_labels))
+        print(new_labels)
+        self.labels_map = dict(zip(unique_labels, new_labels))
         self.batches_idx = 0
         self.epochs = 0
+
+
+
 
     def read_batch_with_details(self, batch_size):
         all_paths, all_labels = self.datasets
@@ -70,7 +80,6 @@ class DataLoader:
             self.epochs += 1
         self.batches_idx += batch_size
 
-        batch_labels = all_labels[indices]
         batch_images = np.zeros((batch_size, self.input_size[0], self.input_size[1], 3))
         paths = []
         labels = []
@@ -78,10 +87,10 @@ class DataLoader:
         for i in indices:
             batch_images[b_idx, :, :, :] = read_image(all_paths[i], self.input_size, augment=self.augment)
             paths.append(all_paths[i])
-            labels.append(all_labels[i])
+            labels.append(self.labels_map[all_labels[i]])
             b_idx += 1
 
-        hot_vecs = tf.keras.utils.to_categorical(batch_labels, num_classes=self.classes_num)
+        hot_vecs = tf.keras.utils.to_categorical(np.array(labels), num_classes=self.classes_num)
         return batch_images, hot_vecs, paths, labels
 
     def read_batch(self, batch_size):
