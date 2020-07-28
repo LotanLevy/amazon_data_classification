@@ -46,22 +46,22 @@ def get_args():
 def main():
     tf.keras.backend.set_floatx('float32')
     args = get_args()
-    if not os.path.exists(args.output_path):
-        os.makedirs(args.output_path)
-
-
-
-    train_dataloader = DataLoader("train_dataset", args.train_file, args.cls_num, args.input_size, args.output_path, augment=True)
-    # val_dataloader = DataLoader("val_dataset", args.val_file, args.cls_num, args.input_size, args.output_path, augment=False)
-
-    optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate1)
-    loss = tf.keras.losses.CategoricalCrossentropy()
-    network = nn_builder.get_network(args.nntype)
-    # network.update_classes(args.cls_num, args.input_size)
-
-    trainer = TrainTestHelper(network, optimizer, loss, training=True)
-
-    train(args.num_epochs1, args.batch_size, trainer, train_dataloader)
+    # if not os.path.exists(args.output_path):
+    #     os.makedirs(args.output_path)
+    #
+    #
+    #
+    # train_dataloader = DataLoader("train_dataset", args.train_file, args.cls_num, args.input_size, args.output_path, augment=True)
+    # # val_dataloader = DataLoader("val_dataset", args.val_file, args.cls_num, args.input_size, args.output_path, augment=False)
+    #
+    # optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate1)
+    # loss = tf.keras.losses.CategoricalCrossentropy()
+    # network = nn_builder.get_network(args.nntype)
+    # # network.update_classes(args.cls_num, args.input_size)
+    #
+    # trainer = TrainTestHelper(network, optimizer, loss, training=True)
+    #
+    # train(args.num_epochs1, args.batch_size, trainer, train_dataloader)
 
 
 if __name__=="__main__":
