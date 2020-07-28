@@ -57,7 +57,7 @@ def main():
     optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate1)
     loss = tf.keras.losses.CategoricalCrossentropy()
     network = nn_builder.get_network(args.nntype)
-    network.update_classes(args.cls_num, args.input_size)
+    # network.update_classes(args.cls_num, args.input_size)
 
     trainer = TrainTestHelper(network, optimizer, loss, training=True)
 
