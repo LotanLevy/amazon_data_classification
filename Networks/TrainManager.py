@@ -13,9 +13,6 @@ class TrainTestHelper:
         self.loss_logger = tf.keras.metrics.Mean(name='loss')
         self.training = training
 
-    def update_optimizer(self, optimizer):
-        self.optimizer = optimizer
-
 
 
     def get_step(self):

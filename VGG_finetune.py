@@ -9,22 +9,14 @@ from Networks.TrainManager import TrainTestHelper
 import nn_builder
 
 
-def train(epochs, batch_size, trainer, validator, train_dataloader, val_dataloader, print_freq, output_path):
+def train(epochs, batch_size, trainer, train_dataloader):
     max_iteration = epochs * batch_size
     trainstep = trainer.get_step()
-    # valstep = validator.get_step()
-    # logger = TrainLogger(trainer, validator, output_path)
     for i in range(max_iteration):
         batch_x, batch_y = train_dataloader.read_batch(batch_size)
         trainstep(batch_x, batch_y)
         print(i)
-        # if i % print_freq == 0:
-        #     batch_x, batch_y = val_dataloader.read_batch(batch_size)
-        #     valstep(batch_x, batch_y)
-        #     logger.update(i)
-        #
-        # if i % epochs == 0:
-        #     model.save_model(int(i/epochs), output_path)
+
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -60,7 +52,7 @@ def main():
 
 
     train_dataloader = DataLoader("train_dataset", args.train_file, args.cls_num, args.input_size, args.output_path, augment=True)
-    val_dataloader = DataLoader("val_dataset", args.val_file, args.cls_num, args.input_size, args.output_path, augment=False)
+    # val_dataloader = DataLoader("val_dataset", args.val_file, args.cls_num, args.input_size, args.output_path, augment=False)
 
     optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate1)
     loss = tf.keras.losses.CategoricalCrossentropy()
@@ -68,14 +60,8 @@ def main():
     network.update_classes(args.cls_num, args.input_size)
 
     trainer = TrainTestHelper(network, optimizer, loss, training=True)
-    validator = TrainTestHelper(network, optimizer, loss, training=False)
 
-    train(args.num_epochs1, args.batch_size, trainer, validator, train_dataloader, val_dataloader, args.print_freq, args.output_path)
-
-    # optimizer = tf.keras.optimizers.Adam(learning_rate=args.learning_rate2)
-    # trainer.update_optimizer(optimizer)
-    # validator.update_optimizer(optimizer)
-    # train(args.num_epochs1, args.batch_size, trainer, validator, train_dataloader, val_dataloader, args.print_freq, args.output_path)
+    train(args.num_epochs1, args.batch_size, trainer, train_dataloader)
 
 
 if __name__=="__main__":
