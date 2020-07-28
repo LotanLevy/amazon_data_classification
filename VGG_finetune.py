@@ -8,6 +8,24 @@ from traintest import train
 
 import nn_builder
 
+
+def train(epochs, batch_size, trainer, validator, train_dataloader, val_dataloader, print_freq, output_path):
+    max_iteration = epochs * batch_size
+    trainstep = trainer.get_step()
+    # valstep = validator.get_step()
+    # logger = TrainLogger(trainer, validator, output_path)
+    for i in range(max_iteration):
+        batch_x, batch_y = train_dataloader.read_batch(batch_size)
+        trainstep(batch_x, batch_y)
+        print(i)
+        # if i % print_freq == 0:
+        #     batch_x, batch_y = val_dataloader.read_batch(batch_size)
+        #     valstep(batch_x, batch_y)
+        #     logger.update(i)
+        #
+        # if i % epochs == 0:
+        #     model.save_model(int(i/epochs), output_path)
+
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--nntype', default="VGGModel", help='The type of the network')
