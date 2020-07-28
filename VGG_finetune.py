@@ -4,7 +4,7 @@ import tensorflow as tf
 import os
 from DataLoader import DataLoader
 from Networks.TrainManager import TrainTestHelper
-from traintest import train
+# from traintest import train
 
 import nn_builder
 
